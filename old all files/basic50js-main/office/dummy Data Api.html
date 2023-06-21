@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid darkblue;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+
+    <title>KULDEEP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="DateController">
+
+    <h1>DUMMY API HIT</h1>
+         <ul>
+        <li ng-repeat="x in users |orderBy:sortColumn">
+            {{x.email}}
+        </li>
+    </ul> 
+
+<!-- <table>
+  <tr>
+    <th>email</th>
+  </tr>
+  
+  <tr ng-repeat="x in users |orderBy:sortColumn">
+    <td>{{x.email}}</td>
+
+  </tr>
+</table> -->
+
+
+
+
+
+    <table>
+
+        <tr>
+            <th>id</th>
+            <th>email</th>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>avatar</th>
+
+        </tr>
+        <tr ng-repeat="x in users |orderBy:sortColumn " >
+            <td>{{x.id}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.first_name}}</td>
+            <td>{{x.last_name}}</td>
+            <td>{{x.avatar}}<img src="{{x.avatar}}" alt=""  height=100 width=100></img></td>
+           </tr>
+
+    </table>
+    <script>
+        angular.module('myApp', [])
+            .controller('DateController', ['$scope', '$http', function ($scope, $http) {
+
+
+                $scope.users = [];
+                $http.get('https://reqres.in/api/users?page=2', {}).then(
+                    (res) => {
+                        $scope.users = res.data.data;
+
+                    },
+                    (err) => {
+
+                        alert(err);
+                    });
+                   $scope.sortColumn = 'first_name';
+                  
+            }]);
+    </script>
+
+<body style="background-color: lightgray;"></p>
+  
+    
+    </body>
+
+</html> 
+

@@ -1,0 +1,118 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Date Difference Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-app="dateApp" ng-controller="dateCtrl">
+
+    <h2>Date Difference Calculator</h2>
+
+    <label for="date1">Date 1:</label>
+    <input type="date" id="date1" ng-model="date1">
+    <br><br>
+
+    <label for="date2">Month 2:</label>
+    <input type="text" id="date2" ng-model="date2" ng-pattern="/^(0?[1-9]|1[0-2])$/" placeholder="MM">
+    <span ng-show="dateForm.date2.$error.pattern">Please enter a valid month (1-12)</span>
+    <br><br>
+ 
+  <label for="date2">Month 2:</label>
+<select id="date2" ng-model="date2">
+  <option value="1">January</option>
+  <option value="2">February</option>
+  <option value="3">March</option>
+  <option value="4">April</option>
+  <option value="5">May</option>
+  <option value="6">June</option>
+  <option value="7">July</option>
+  <option value="8">August</option>
+  <option value="9">September</option>
+  <option value="10">October</option>
+  <option value="11">November</option>
+  <option value="12">December</option>
+</select>
+<br><br> -->
+
+
+    <!-- <button ng-click="calculateDifference()" ng-disabled="dateForm.$invalid">Calculate Difference</button>
+
+    <h3>Result:</h3>
+    <input type="text" ng-model="difference" readonly>
+
+    <script>
+        var app = angular.module('dateApp', []);
+        app.controller('dateCtrl', function ($scope) {
+            $scope.calculateSum = function () {
+                var date1 = new Date($scope.date1);
+                var month2 = parseInt($scope.date2) - 1; // Subtract 1 to match JavaScript Date month indexing
+
+                var year2 = date1.getFullYear();
+                var day2 = 1; // Set the day to 1 for consistency
+
+                var date2 = new Date(year2, month2, day2);
+
+                var SumInMilliseconds = Math.abs(date2 + date1);
+                var SumInDays = Math.floor(SumInMilliseconds / (1000 * 60 * 60 * 24));
+                var SumInMonths = Math.floor(SumInDays / 30.436875); // Approximation to account for varying month lengths
+                var SumInYears = Math.floor(SumInMonths / 12);
+
+                $scope.calculateSum = SumInYears + " years, " + SumInMonths + " months, " + SumInDays + " days";
+            };
+        });
+    </script>
+
+</body>
+
+</html>   -->
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>KULDEEP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-app="dateApp" ng-controller="dateCtrl">
+
+    <h2>calculate years</h2>
+
+    <label for="date1">start date :</label>
+    <input type="date" id="date1" ng-model="date1">
+    <br><br>
+
+    <label for="date2">tenure period:</label>
+    <input type="date" id="date2" ng-model="date2">
+    <br><br>
+
+    <button ng-click="calculateDifference()">onclick</button>
+
+    <h3>Result:</h3>
+    <input type="text" ng-model="difference" readonly>
+
+    <script>
+        var app = angular.module('dateApp', []);
+        app.controller('dateCtrl', function ($scope) {
+            $scope.calculateDifference = function () {
+                var date1 = new Date($scope.date1);
+                var date2 = new Date($scope.date2);
+
+                var diffInMilliseconds = Math.abs(date2 - date1);
+                console.log(diffInMilliseconds);
+                var diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+                var diffInMonths = Math.floor(diffInDays / 30.436875); // Approximation to account for varying month lengths
+                var diffInYears = Math.floor(diffInMonths / 12);
+
+                $scope.difference = diffInYears + " years, " + diffInMonths + " months, " + diffInDays + " days";
+            };
+        });
+    </script>
+
+</body>
+
+</html> 

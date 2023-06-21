@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+
+  
+<h1>{{userData.email}}</h1>
+  <script>
+    var app = angular.module('myApp', []);
+
+    app.controller('myController', function($scope, $http) {
+      $scope.userData = {
+        email: "eve.holt@reqres.in",
+        password: "pistol"
+      };
+
+      $scope.registerUser = function() {
+        
+        $http.post('https://reqres.in/api/register', $scope.userData)
+          .then(
+            (res) => { 
+                $scope.userData2=res.data;
+            }, 
+          (error)=> {
+            (error);
+          });
+      };
+      $scope.registerUser()
+    });
+  </script>
+
+</body>
+</html>

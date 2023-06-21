@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <title>IP Location Tracker</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="LocationController">
+
+  <input type="text" ng-model="ipAddress" placeholder="Enter IP address">
+  <button ng-click="trackLocation()">Track</button>
+  <div ng-if="location">
+    <ul>
+        <!-- <label ng-bind="location.city" ></label> -->
+      <li ng-bind="location.city"></li>
+      <li ng-bind="location.country">COUNTRY</li>
+      <li ng-bind="location.timezone">TIMEZONE</li>
+    </ul>
+  </div><br>
+
+  <script>
+    angular.module('myApp', [])
+      .controller('LocationController', ['$scope', '$http', function($scope, $http) {
+        $scope.trackLocation = function() {
+          var ipAddress = $scope.ipAddress;
+          var apiUrl = 'http://ip-api.com/json/' + ipAddress;
+
+          $http.get(apiUrl)
+            .then(function(response) {
+              $scope.location = {
+                city: response.data.city,
+                country: response.data.country,
+                timezone: response.data.timezone,
+              };
+            })
+            .catch(function(error) {
+              $scope.location = null;
+              console.error(error);
+            });
+        };
+      }]);
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="employeeApp">
+
+<head>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 85%;
+        }
+    
+        th,
+        td {
+          border: 2px solid black;
+          padding: 10px;
+          text-align: center;
+        }
+      </style>
+  <title>Employee Data</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script>
+    angular.module('employeeApp', [])
+      .controller('EmployeeController', function($scope, $http) {
+        $scope.users = [];
+
+        // GET request
+        $http.get('https://reqres.in/api/users?page=2')
+          .then((res) => {
+            $scope.users = res.data.data;
+          })
+          .catch(function(error) {
+            console.log('Error:', error);
+          });
+
+        // DELETE request
+        $scope.deleteUser = function(user) {
+          $http.delete('https://reqres.in/api/users/' + user.id)
+            .then(function(response) {
+              var index = $scope.users.indexOf(user);
+              $scope.users.splice(index, 1);
+            })
+            .catch(function(error) {
+              console.log('Error:', error);
+            });
+        };
+
+        // UPDATE request
+        $scope.updateUser = function(user) {
+            $http.put('https://reqres.in/api/users/' + user.id, user)
+            .then(
+                (res) => {
+                        
+                        $scope.users= res.data.data;
+                    },
+                    (err) => {
+                        alert(err);
+            });
+        };
+      });
+  </script>
+</head>
+
+<body ng-controller="EmployeeController">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>avatar</th>
+        <th>Delete</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in users | orderBy:'first_name'" >
+        <td>{{ user.id }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }} </td>
+        <td>{{x.avatar}}<img src="{{x.avatar}}" alt=""  height=100 width=100></img></td>
+        <td><button ng-click="deleteUser(user)">Delete</button></td>
+        <td><button ng-click="updateUser(user)">Update</button></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

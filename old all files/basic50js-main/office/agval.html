@@ -1,0 +1,38 @@
+
+
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
+
+</script>  
+
+<style>
+    input.ng-invalid {
+        background-color:pink;
+    }
+    input.ng-valid {
+        background-color:lightgreen;
+    }
+    </style>
+
+<body style="background-image: url('kddd.webp');"></p>
+    
+<body ng-app="">
+
+    <h1>THIS IS SIMPLE VALIDATION FORM FOR THE E-MAIL AND THE MOBILE NUMBER1</h1>
+
+<p>Try writing an E-mail address</p>
+
+<form name="myForm">
+<input type='email' type="email" name="email" id="email" ng-model="myInput">
+<p>The input's valid state is:</p>
+<h1>{{myForm.email.$valid}}</h1>
+
+<p>Try writing an Mobile Number</p>
+<input type="mobile " name="mobile" min="10" max="10" id="mobile" ng-model="Input">
+<p>The input's valid state is:</p>
+<h1>{{myForm.mobile.$valid}}</h1>
+
+</form>
+</body> 
+</html>

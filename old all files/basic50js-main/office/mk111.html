@@ -1,0 +1,88 @@
+<!-- <!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <title>IP Location Tracker</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="LocationController">
+
+  <input type="text" ng-model="ipAddress" placeholder="Enter IP address">
+  <button ng-click="trackLocation()">Track</button>
+  <p ng-if="location">{{ location[0].city }}</p>
+
+  <script>
+    angular.module('myApp', [])
+      .controller('LocationController', ['$scope', '$http', function($scope, $http) {
+        $scope.trackLocation = function() {
+            debugger
+          var ipAddress = $scope.ipAddress;
+          var apiUrl = 'http://ip-api.com/json/' + ipAddress;
+
+          $http.get(apiUrl)
+            .then((res) => {
+              $scope.location = [
+              $scope.test = res.data,
+                res.data.city,
+                res.data.country,
+                 res.data.countryCode,
+                res.data.isp,
+                res.data.lat,
+                res.data.lon,
+                res.data.region,
+                res.data.regionName,
+                res.data.status,
+                res.data.timezone,
+
+              ];
+            })
+            ( (err)=> {
+              $scope.location = 'Error occurred while tracking location.';
+              alert(err);
+            });
+        };
+      }]);
+  </script>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <title>IP Location Tracker</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="LocationController">
+
+  <input type="text" ng-model="ipAddress" placeholder="Enter IP address">
+  <button ng-click="trackLocation()">Track</button>
+  <p ng-if="location">{{ location }}</p>
+
+  <script>
+    angular.module('myApp', [])
+      .controller('LocationController', ['$scope', '$http', function($scope, $http) {
+        $scope.trackLocation = function() {
+          var ipAddress = $scope.ipAddress;
+          var apiUrl = 'http://ip-api.com/json/' + ipAddress;
+
+          $http.get(apiUrl)
+            .then((res) => {
+              $scope.location = res.data.country + ' , '+ res.data.city + ' , '+ res.data.zip + res.data.as + ' , ' + res.data.timezone  ;
+            })
+            ( (err)=> {
+              $scope.location = 'Error occurred while tracking location.';
+              alert(err);
+            });
+        };
+      }]);
+  </script>
+
+</body>
+
+</html>
+

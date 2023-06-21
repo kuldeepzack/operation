@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html ng-app="employeeApp">
+
+<head>
+  <title>Employee Data</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 85%;
+    }
+
+    th,
+    td {
+      border: 2px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body ng-controller="EmployeeController">
+  <select ng-model="selectedEmployee" ng-options="employee as employee.name for employee in employees" ng-change="filterTable()">
+    <option value="">Select an employee</option>
+  </select>
+  <br></br>
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>salary</th>
+        <th>Edit</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="employee in filteredEmployees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.salary }}</td>
+        <td><button ng-click="editEmployee(employee)">Edit</button></td>
+        <td><button ng-click="removeEmployee(employee)">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Add Employee</h2>
+  <input type="text" ng-model="newEmployee.name" placeholder="Name">
+  <br></br>
+  <input type="text" ng-model="newEmployee.id" placeholder="ID">
+  <br></br>
+  <input type="text" ng-model="newEmployee.salary" placeholder="Salary">
+  <br></br>
+  <button ng-click="addEmployee()">Add</button>
+  <br><br>
+  <h2>Edit Employee</h2>
+  
+  <input type="text" ng-model="NewEmployee.id" placeholder="ID">
+  <br><br>
+  <input type="text" ng-model="NewEmployee.name" placeholder="Name">
+  <br><br>
+  <input type="text" ng-model="NewEmployee.salary" placeholder="Salary">
+  <br><br>
+  <button ng-click="saveEmployee()">Save</button>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script>
+    angular.module('employeeApp', [])
+      .controller('EmployeeController', function($scope) {
+        $scope.employees = [{
+            id: 1,
+            name: 'Rahul',
+            salary: 1000
+          },
+          {
+            id: 2,
+            name: 'Sandeep',
+            salary: 1500
+          },
+          {
+            id: 3,
+            name: 'Mukesh',
+            salary: 1200
+          }
+        ];
+
+        $scope.filteredEmployees = [];
+
+        $scope.filterTable = function() {
+          if ($scope.selectedEmployee) {
+            $scope.filteredEmployees = [$scope.selectedEmployee];
+          } else {
+            $scope.filteredEmployees = $scope.employees;
+          }
+        };
+
+        $scope.addEmployee = function() {
+          $scope.employees.push(angular.copy($scope.newEmployee));
+          $scope.newEmployee = {};
+        };
+
+        
+        $scope.editEmployee = function(employee) {
+          $scope.NewEmployee = angular.copy(employee);
+        };
+
+            
+
+            $scope.saveEmployee = function () {
+  var editEmployee = $scope.employees.find(x => x.id === $scope.NewEmployee.id);
+  if (editEmployee) {
+    editEmployee.name = $scope.NewEmployee.name;
+    editEmployee.salary = $scope.NewEmployee.salary;
+  }
+};
+ 
+
+        $scope.removeEmployee = function(employee) {
+          var index = $scope.employees.indexOf(employee);
+          $scope.employees.splice(index, 1);
+          $scope.filterTable();
+        };
+
+      
+
+        $scope.filterTable();
+      });
+  </script>
+
+<body style="background-color: antiquewhite;"></body>
+</body>
+
+</html>
+
+

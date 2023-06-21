@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html ng-app="dateApp">
+
+<head> 
+    <style>
+
+        
+        table, th, td {
+          border: 1px solid black;
+        }
+        h1{text-align: center;}
+        </style>
+
+  <title>KULDEEP</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="DateController">
+
+  <h1>DUMMY API HIT</h1>
+
+  
+
+  
+  <ul>
+    <li ng-repeat="x in users">
+        {{x.email}}
+    </li>
+  </ul>
+  <table>
+    <ul>
+        <tr>
+            <li>
+            <th>id</th>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>email</th>
+            <th>avatar</th>
+</li>
+        </tr>
+    </ul>
+    
+    
+        <!-- <tr ng-repeat="x in users">
+            <td>{{x.id}}</td>
+            <td>{{x.id}}</td>
+            <td>{{x.id}}</td>
+            <td>{{x.id}}</td>
+            <td>{{x.id}}</td>
+           
+        </tr>
+
+        <tr ng-repeat="x in users">
+            <td>{{x.email}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.email}}</td> -->
+           
+        <!-- </tr>
+
+        <tr ng-repeat="x in users">
+            <td>{{x.avatar}}</td>
+            <td>{{x.avatar}}</td>
+            <td>{{x.avatar}}</td>
+            <td>{{x.avatar}}</td>
+            <td>{{x.avatar}}</td>
+           
+        </tr>  --> 
+
+        
+ <!-- <td> <li><a href="#/"> {{x.first_name}}/</a></li></td> -->
+         <tr ng-repeat="x in users">
+            <ul>
+            <td>{{x.id}}</td>
+            
+            <!-- <td>{{x.first_name}}</td> -->
+            <td> <li><a href="#/"></a> {{x.first_name}} </a></li></td>
+            <td>{{x.last_name}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.avatar}}<img src="{{x.avatar}}" alt="" border=3 height=100 width=100></img></td>
+            </ul>
+        </tr> 
+     
+  </table>
+  <script>
+    angular.module('dateApp', [])
+      .controller('DateController', ['$scope','$http', function($scope,$http) {
+       
+
+          $scope.users=[];
+          $http.get('https://reqres.in/api/users?page=2', {}).then(
+            (res)=>
+            {
+                $scope.users=res.data.data;
+
+            },
+             (err)=>{
+
+                 alert(err);
+             });
+
+        } ]);
+        
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+
+ <!DOCTYPE html>
+<html ng-app="employeeApp">
+
+<head>
+  <title>Employee Data</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 85%;
+    }
+
+    th,
+    td {
+      border: 2px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body ng-controller="EmployeeController">
+
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="employee in employees | orderBy:sortColumn";>
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.salary }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Add Employee</h2>
+  <input type="text" ng-model="newEmployee.name" placeholder="Name">
+  <br></br>
+  <input type="text" ng-model="newEmployee.id" placeholder="ID">
+  <br></br>
+  <input type="text" ng-model="newEmployee.salary" placeholder="Salary">
+  <br></br>
+  <button ng-click="addEmployee()">Add</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script>
+    angular.module('employeeApp', [])
+      .controller('EmployeeController', function($scope) {
+        $scope.employees = [{
+            id: 1,
+            name: 'Rahul',
+            salary: 1000
+          },
+          {
+            id: 2,
+            name: 'Sandeep',
+            salary: 1500
+          },
+          {
+            id: 1,
+            name: 'Mukesh',
+            salary: 1200
+          }
+        ];
+
+        $scope.addEmployee = function() {
+          var name = $scope.newEmployee.name;
+          var id = $scope.newEmployee.id;
+          var salary = $scope.newEmployee.salary;
+
+          var newEmployee = {
+            id: id,
+            name: name,
+            salary: salary
+          };
+
+          $scope.employees.push(newEmployee);
+
+          $scope.newEmployee = {};
+        };
+      });
+      
+
+  </script>
+      
+
+</body>
+
+</html>
+

@@ -1,0 +1,85 @@
+ <!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <style>
+        table,
+        th,
+        td {
+            border: 3px solid darkblue;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+
+    <title>KULDEEP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="DateController">
+
+    <h1>DUMMY API HIT</h1>
+         <ul>
+        <li ng-repeat="x in users |orderBy: 'first_name' ">
+            {{x.email}}
+        </li>
+    </ul> 
+
+    <table>
+
+        <tr>
+            <th>id</th>
+            <th>email</th>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>avatar</th>
+
+        </tr>
+        <tr ng-repeat="x in users |orderBy:'first_name' " >
+            <td>{{x.id}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.first_name}}</td>
+            <td>{{x.last_name}}</td>
+            <td>{{x.avatar}}<img src="{{x.avatar}}" alt=""  height=100 width=100></img></td>
+            <button ng-click="edit">edit</button>
+            <br></br>
+            <button ng-click="delete">delete</button>
+            <br></br>
+
+           </tr>
+
+    </table>
+    <script>
+        angular.module('myApp', [])
+            .controller('DateController', ['$scope', '$http', function ($scope, $http) {
+
+
+                $scope.users = [];
+                $http.get('https://reqres.in/api/users?delay=3', {}).then(
+                    (res) => {
+                        $scope.users = res.data.data;
+
+                    },
+                    (err) => {
+
+                        alert(err);
+                    });
+                
+                  
+            }]);
+            
+    $scope.deleteUser=function(index){
+        if($scope.users.id.length){
+            $scope.users.id.splice(index, 1);
+        }
+
+}
+    </script>
+    </body>
+
+</html> 
+ 
+
+

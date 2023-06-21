@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>AngularJS Email Validation</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+</head>
+<body>
+  <div ng-controller="myController">
+    <form name="myForm">
+      <input type="email" name="email" ng-model="email" ng-pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/" required>
+      <span ng-show="myForm.email.$error.email && !myForm.email.$pristine">
+        Invalid email address.
+      </span>
+      <br>
+      <button ng-click="submitForm()" ng-disabled="myForm.$invalid">Submit</button>
+    </form>
+  </div>
+
+  <script>
+   var app= angular.module('myApp', []);
+   app.controller('myController', function($scope) { $scope.submitForm = function() { console.log('Email:', $scope.email); };
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!--  <!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+</head>
+<body ng-controller="myController">
+  <form ng-submit="postData()">
+    <label for="job">Job:</label>
+    <h1>You entered: {{job}}</h1>
+    <input type="text" id="job" ng-model="job" required><br><br>
+    <label for="name">Name:</label>
+    <h1>You entered: {{name}}</h1>
+    <input type="text" id="name" ng-model="name" required><br><br>
+    <button type="submit">Submit</button>
+  </form>
+  
+  <script>
+    angular.module('myApp', [])
+      .controller('myController', function($scope, $http) {
+        $scope.postData = function() {
+          var data = {
+            job: $scope.job,
+            name: $scope.name
+          };
+          
+          $http.post('https://reqres.in/api/users', data)
+            .then(
+                (res) => {
+                        
+                        $scope.data= res.data.data;
+                    },
+                    (err) => {
+                        alert(err);
+            });
+        };
+      });
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+</head>
+<body ng-controller="myController">
+  <form ng-submit="postData()">
+    <label for="job">Job:</label>
+    <!-- <h1>You entered: {{job}}</h1> -->
+    <input type="text" id="job" ng-model="job" required><br><br>
+    <label for="name">Name:</label>
+    <!-- <h1>You entered: {{name}}</h1> -->
+    <input type="text" id="name" ng-model="name" required><br><br>
+    <button type="submit">Submit</button>
+  </form>
+  <div>{{name}}</div>
+  <div>{{job}}</div>
+
+  <script>
+    angular.module('myApp', [])
+      .controller('myController',['$scope','$http', function($scope, $http) {
+        $scope.postData = function() {
+          var data = {
+            job: $scope.job,
+            name: $scope.name
+          };
+          
+          $http.post('https://reqres.in/api/users', data)
+            .then(
+                (res) => {
+                        
+                        $scope.postData= res.data.data;
+                    },
+                    (err) => {
+                        alert(err);
+            });
+        };
+      }]);
+  </script>
+</body>
+</html>
+

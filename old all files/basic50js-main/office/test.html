@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE html>
+<html>
+<title>Online HTML Editor</title>
+<head>
+</head>
+<body>
+<h1>Online HTML Editor</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js">
+
+var app = angular.module('dateApp', []);
+        app.controller('dateCtrl', function ($scope) {
+            $scope.calculateEndDate = function () {
+                var startDate = new Date($scope.startDate1);
+                var duration = parseInt($scope.startDate2);
+
+                var endDate = new Date(startDate1.getFullYear() + starDate2.getFullYear(), startDate1.getMonth() + startDate2.getMonth(), startDate1.getDate()+ startDate2.getDate());
+
+                $scope.endDate = endDate.toISOString().split('T')[0];
+            };
+        });
+</script>
+
+<div ng-app>  
+    <label for="startDate1">Start Date:</label>
+    <input type="date" id="startDate1" ng-model="startDate1">
+  
+  <label for="startDate2">tenure period (in months):</label>
+    <input type="date" id="startDate2" ng-model="startDate2" min="1">
+
+    <button ng-click="calculateEndDate()" ng-disabled="!startDate || !duration">onclick </button> 
+
+    <h2>endDate:</h2>
+    <input type="text" ng-model="endDate" readonly>
+  
+</div>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shop Closing Time Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-app="shopApp" ng-controller="shopCtrl">
+
+    <h2>Shop Closing Time Calculator</h2>
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" ng-model="startDate">
+    <br><br>
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" ng-model="endDate" readonly>
+    <br><br>
+
+    <label for="duration">Duration:</label>
+    <input type="text" id="duration" ng-model="duration">
+    <br>
+    <small>Format: [value]d or [value]m or [value]y</small>
+    <br><br>
+
+    <button ng-click="calculateEndDate()" ng-disabled="!startDate || !duration">Calculate End Time</button>
+
+    <style>
+        .clicked {
+            background-color: red;
+            color: white;
+        }
+    </style>
+
+    <script>
+        var app = angular.module('shopApp', []);
+        app.controller('shopCtrl', function ($scope) {
+            $scope.calculateEndDate = function () {
+                var startDateTime = new Date($scope.startDate);
+
+                var duration = $scope.duration;
+                var value = parseInt(duration.substring(0, duration.length - 1));
+                var unit = duration.slice(-1);
+
+                var endDateTime = new Date(startDateTime.getTime());
+
+                if (unit === 'd') {
+                    endDateTime.setDate(endDateTime.getDate() + value);
+                } else if (unit === 'm') {
+                    endDateTime.setMonth(endDateTime.getMonth() + value);
+                } else if (unit === 'y') {
+                    endDateTime.setFullYear(endDateTime.getFullYear() + value);
+                }
+
+                $scope.endDate = endDateTime.toISOString().split('T')[0];
+            };
+        });
+    </script>
+
+</body>
+
+</html> -->
+
+
+API TESTING  
+
+
+<!DOCTYPE html>
+<html ng-app="dateApp">
+
+<head> 
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+        h1{text-align: center;}
+        </style>
+
+  <title>KULDEEP</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="DateController">
+
+  <h1>DUMMY API HIT</h1>
+
+  
+
+  
+  <ul>
+    <li ng-repeat="x in users">
+        {{x.email}}
+    </li>
+  </ul>
+  <table>
+    
+        <tr>
+            <th>id</th>
+            <th>email</th>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>avatar</th>
+
+        </tr>
+    
+    
+        <tr ng-repeat="x in users">
+            <td>{{x.id}}</td>
+            <td>{{x.id}}</td>
+            <td>{{x.id}}</td>
+            <td>{{x.id}}</td>
+            <td>{{x.id}}</td>
+           
+        </tr>
+
+        <tr ng-repeat="x in users">
+            <td>{{x.email}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.email}}</td>
+           
+        </tr>
+
+        <tr ng-repeat="x in users">
+            <td>{{x.avatar}}</td>
+            <td>{{x.avatar}}</td>
+            <td>{{x.avatar}}</td>
+            <td>{{x.avatar}}</td>
+            <td>{{x.avatar}}</td>
+           
+        </tr>
+        <!-- <tr ng-repeat="x in users">
+            <td>{{x.id}}</td>
+            <td>{{x.mail}}</td>
+            <td>{{x.firstname}}</td>
+            <td>{{x.lastname}}</td>
+            <td>{{x.avatar}}</td>
+           
+        </tr>
+     -->
+  </table>
+  <script>
+    angular.module('dateApp', [])
+      .controller('DateController', ['$scope','$http', function($scope,$http) {
+       
+
+          $scope.users=[];
+          $http.get('https://reqres.in/api/users?page=2', {}).then(
+            (res)=>
+            {
+                $scope.users=res.data.data;
+
+            },
+             (err)=>{
+
+                 alert(err);
+             });
+
+        } ]);
+  </script>
+<body style="background-image: url('kddd.webp');"></p>
+</body>
+
+</html>

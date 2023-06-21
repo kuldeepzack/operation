@@ -1,0 +1,69 @@
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+
+  <button ng-click="createUser()">Create User</button>
+
+  <script>
+    var app = angular.module('myApp', []);
+
+    app.controller('myController', function($scope, $http) {
+      $scope.userData = {
+        name: "John Doe",
+        job: "Software Engineer"
+      };
+
+      $scope.createUser = function() {
+        $http.post('https://reqres.in/api/users', $scope.userData)
+          .then(function(response) {
+            console.log(response.data);
+          }, function(error) {
+            console.error('Error:', error);
+          });
+      };
+    });
+  </script>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+
+  <!-- <button ng-click="createUser()">Create User</button> -->
+<h1>{{userData.name}}</h1>
+  <script>
+    var app = angular.module('myApp', []);
+
+    app.controller('myController', function($scope, $http) {
+      $scope.userData = {
+         name: "John Doe",
+        job: "Software Engineer"
+        // email: "John@gmail.in",
+        // password: "SoftwareEngineer"
+      };
+
+      $scope.updateUser = function() {
+        $http.put('https://reqres.in/api/users/2', $scope.userData)
+          .then(
+            (res) => { $scope.userData=res.data;}, 
+          (error)=> {
+            (error);
+          });
+      };
+      $scope.updateUser()
+    });
+  </script>
+
+</body>
+</html>
+
